@@ -3,6 +3,7 @@ import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Topbar } from "@/components/layout/Topbar";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Link from "next/link";
 
 const inter = Inter({
@@ -28,23 +29,30 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${geistMono.variable} h-full dark`}
+      className={`${inter.variable} ${geistMono.variable} h-full`}
+      suppressHydrationWarning
     >
       <body className="min-h-full overflow-x-hidden w-full max-w-[100vw]">
-        <div className="flex min-h-screen bg-background w-full">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen bg-background w-full">
           <Sidebar />
           <div className="flex flex-1 flex-col lg:pl-64 w-full min-w-0 max-w-full">
             <Topbar />
             <main className="flex-1 p-6 lg:p-10 relative w-full min-w-0 flex flex-col overflow-x-hidden">
               {children}
               <footer className=" flex justify-center pb-8 transition-opacity duration-300 group w-fit mx-auto">
-                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-500 group-hover:text-slate-400">
+                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-400">
                   Design & Developed by{" "}
                   <Link
                     href="https://babacreates.in"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-slate-300 group-hover:text-white transition-colors underline decoration-slate-700 underline-offset-4"
+                    className="text-slate-600 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors underline decoration-slate-700 underline-offset-4"
                   >
                     Anmol
                   </Link>{" "}
@@ -54,6 +62,7 @@ export default function RootLayout({
             </main>
           </div>
         </div>
+        </ThemeProvider>
       </body>
     </html>
   );

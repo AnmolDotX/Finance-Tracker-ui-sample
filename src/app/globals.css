@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@custom-variant dark (&:is(.dark *));
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -15,6 +15,11 @@
 }
 
 :root {
+  --background: #f8fafc; /* slate-50 */
+  --foreground: #0f172a; /* slate-900 */
+}
+
+.dark {
   --background: #000000;
   --foreground: #ffffff;
 }
@@ -28,8 +33,12 @@
     -webkit-font-smoothing: antialiased;
   }
   body {
-    @apply bg-background text-foreground selection:bg-slate-800 min-h-screen antialiased overflow-x-hidden;
+    @apply bg-background text-foreground min-h-screen antialiased overflow-x-hidden;
     font-weight: 400; /* Normal */
+  }
+  /* For text selection color */
+  ::selection {
+    @apply bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100;
   }
   h1, h2, h3, h4, h5, h6 {
     font-weight: 500; /* Medium */
@@ -39,16 +48,16 @@
 
 @layer utilities {
   .glass {
-    @apply bg-slate-900/40 backdrop-blur-md shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+    @apply bg-white/40 dark:bg-slate-900/40 backdrop-blur-md shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
   }
   .shadow-subtle {
-    @apply shadow-[0_1px_3px_0_rgba(0,0,0,0.1),0_1px_2px_0_rgba(0,0,0,0.06)];
+    @apply shadow-[0_1px_3px_0_rgba(0,0,0,0.05),0_1px_2px_0_rgba(0,0,0,0.03)] dark:shadow-[0_1px_3px_0_rgba(0,0,0,0.1),0_1px_2px_0_rgba(0,0,0,0.06)];
   }
   .shadow-medium {
-    @apply shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)];
+    @apply shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05),0_2px_4px_-1px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)];
   }
   .shadow-large {
-    @apply shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)];
+    @apply shadow-[0_20px_25px_-5px_rgba(0,0,0,0.05),0_10px_10px_-5px_rgba(0,0,0,0.02)] dark:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)];
   }
   .no-border {
     border: none !important;
@@ -66,5 +75,5 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-800/50 hover:bg-slate-700 transition-colors;
+  @apply bg-slate-300 dark:bg-slate-800/50 hover:bg-slate-400 dark:hover:bg-slate-700 transition-colors;
 }
