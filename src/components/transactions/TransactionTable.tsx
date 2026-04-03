@@ -34,8 +34,8 @@ export function TransactionTable() {
   }
 
   return (
-    <div className="overflow-x-auto no-border">
-      <table className="w-full text-left no-border">
+    <div className="overflow-x-auto no-border pb-4">
+      <table className="w-full min-w-[800px] text-left no-border">
         <thead className="no-border">
           <tr className="bg-slate-900/50 no-border">
             <th className="px-8 py-4 text-[10px] font-medium uppercase tracking-widest text-slate-500">Date</th>

@@ -1,11 +1,13 @@
 "use client";
 
-import { User, Bell, ChevronRight, Activity } from "lucide-react";
+import { User, Bell, ChevronRight, Activity, Menu } from "lucide-react";
 import { motion } from "motion/react";
 import { usePathname } from "next/navigation";
+import { useFinanceStore } from "@/store/useFinanceStore";
 
 export function Topbar() {
   const pathname = usePathname();
+  const { setIsSidebarOpen } = useFinanceStore();
   
   const getBreadcrumb = (path: string) => {
     if (path === "/") return "Dashboard";
@@ -17,6 +19,12 @@ export function Topbar() {
   return (
     <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-none px-6 backdrop-blur-md lg:px-10 shadow-subtle rounded-none!">
       <div className="flex h-10 items-center gap-4 border-none">
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="flex h-9 w-9 items-center justify-center bg-slate-900/50 text-slate-500 hover:text-slate-300 no-border shadow-subtle lg:hidden"
+        >
+          <Menu className="h-4 w-4" />
+        </button>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-100 shadow-sm rounded-none! no-border">
           <Activity className="h-3 w-3 text-slate-950 animate-pulse" />
           <span className="text-[10px] font-bold uppercase tracking-widest text-slate-950">Live</span>

@@ -5,12 +5,21 @@ import { TransactionTable } from "@/components/transactions/TransactionTable";
 import { AddTransactionModal } from "@/components/transactions/AddTransactionModal";
 import { Filter, Search, Plus, LayoutGrid, ShieldCheck, Eye } from "lucide-react";
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 export default function TransactionsPage() {
   const { currentRole, setRole, filters, setFilters, resetFilters } = useFinanceStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(filters.search);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setFilters({ search: searchTerm });
+    }, 300);
+
+    return () => clearTimeout(handler);
+  }, [searchTerm, setFilters]);
 
   return (
     <div className="space-y-12 pb-20 no-border">
@@ -44,8 +53,8 @@ export default function TransactionsPage() {
           <input
             type="text"
             placeholder="Search by description or category..."
-            value={filters.search}
-            onChange={(e) => setFilters({ search: e.target.value })}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="flex-1 bg-transparent text-[10px] font-medium uppercase tracking-widest text-slate-200 outline-none placeholder:text-slate-700 no-border"
           />
         </div>

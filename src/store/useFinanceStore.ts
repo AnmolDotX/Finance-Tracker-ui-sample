@@ -22,6 +22,7 @@ interface FinanceState {
     category: string;
     type: 'all' | TransactionType;
   };
+  isSidebarOpen: boolean;
   // Actions
   addTransaction: (tx: Omit<Transaction, 'id'>) => void;
   updateTransaction: (id: string, tx: Partial<Transaction>) => void;
@@ -29,6 +30,7 @@ interface FinanceState {
   setRole: (role: Role) => void;
   setFilters: (filters: Partial<FinanceState['filters']>) => void;
   resetFilters: () => void;
+  setIsSidebarOpen: (open: boolean) => void;
 }
 
 const MOCK_DATA: Transaction[] = [
@@ -51,6 +53,7 @@ export const useFinanceStore = create<FinanceState>()(
         category: 'all',
         type: 'all',
       },
+      isSidebarOpen: false,
       addTransaction: (tx) => set((state) => ({
         transactions: [{ ...tx, id: Math.random().toString(36).substr(2, 9) }, ...state.transactions]
       })),
@@ -67,6 +70,7 @@ export const useFinanceStore = create<FinanceState>()(
       resetFilters: () => set({
         filters: { search: '', category: 'all', type: 'all' }
       }),
+      setIsSidebarOpen: (open) => set({ isSidebarOpen: open }),
     }),
     {
       name: 'zorvyn-finance-storage',
