@@ -1,26 +1,70 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #334155; /* Slate-700 */
+  --color-primary-foreground: #f8fafc;
+  --color-accent: #64748b; /* Slate-500 */
+  --color-card-bg: rgba(255, 255, 255, 0.03);
+  --color-muted: #94a3b8;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --font-sans: "Inter", "Geist Sans", sans-serif;
+  --font-mono: "Geist Mono", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+@layer base {
+  /* Remove all border radius globally */
+  * {
+    border-radius: 0 !important;
+    border-width: 0 !important;
+    box-shadow: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-background text-foreground selection:bg-slate-800 min-h-screen antialiased overflow-x-hidden;
+    font-weight: 400; /* Normal */
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 500; /* Medium */
+    letter-spacing: -0.02em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .glass {
+    @apply bg-slate-900/40 backdrop-blur-md shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+  }
+  .shadow-subtle {
+    @apply shadow-[0_1px_3px_0_rgba(0,0,0,0.1),0_1px_2px_0_rgba(0,0,0,0.06)];
+  }
+  .shadow-medium {
+    @apply shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)];
+  }
+  .shadow-large {
+    @apply shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),0_10px_10px_-5px_rgba(0,0,0,0.04)];
+  }
+  .no-border {
+    border: none !important;
+  }
+  .sharp {
+    border-radius: 0 !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800/50 hover:bg-slate-700 transition-colors;
 }
