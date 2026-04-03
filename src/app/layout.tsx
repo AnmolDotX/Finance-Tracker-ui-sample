@@ -30,12 +30,12 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${geistMono.variable} h-full dark`}
     >
-      <body className="min-h-full">
-        <div className="flex min-h-screen bg-background">
+      <body className="min-h-full overflow-x-hidden w-full max-w-[100vw]">
+        <div className="flex min-h-screen bg-background w-full">
           <Sidebar />
-          <div className="flex flex-1 flex-col lg:pl-64">
+          <div className="flex flex-1 flex-col lg:pl-64 w-full min-w-0 max-w-full">
             <Topbar />
-            <main className="flex-1 p-6 lg:p-10 relative">
+            <main className="flex-1 p-6 lg:p-10 relative w-full min-w-0 flex flex-col overflow-x-hidden">
               {children}
               <footer className=" flex justify-center pb-8 transition-opacity duration-300 group w-fit mx-auto">
                 <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-500 group-hover:text-slate-400">
